@@ -85,7 +85,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(580, 287);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(580, 369);
             this.tableLayoutPanel1.TabIndex = 2;
             this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
             // 
@@ -101,7 +101,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(570, 123);
+            this.dataGridView1.Size = new System.Drawing.Size(570, 205);
             this.dataGridView1.TabIndex = 3;
             // 
             // btnDataImport
@@ -165,7 +165,7 @@
             // 
             this.cbCom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cbCom.FormattingEnabled = true;
-            this.cbCom.Location = new System.Drawing.Point(147, 7);
+            this.cbCom.Location = new System.Drawing.Point(147, 11);
             this.cbCom.Margin = new System.Windows.Forms.Padding(5);
             this.cbCom.Name = "cbCom";
             this.cbCom.Size = new System.Drawing.Size(422, 28);
@@ -189,7 +189,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(580, 287);
+            this.ClientSize = new System.Drawing.Size(580, 369);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.Margin = new System.Windows.Forms.Padding(5);

@@ -16,6 +16,9 @@ namespace HRF_StockImport
         DataTable sheetdata = new DataTable();
         DataTable nodata = new DataTable();
         DataRow no_dr;
+        float exp001 = 0;
+        float exp002 = 0;
+        float exp003 = 0;
         public Form1()
         {
             InitializeComponent();
@@ -73,6 +76,9 @@ namespace HRF_StockImport
                 DialogResult result = MessageBox.Show("匯入後將更新庫存數量，是否要匯入?","訊息視窗",MessageBoxButtons.OKCancel,MessageBoxIcon.Question);
                 if(result == DialogResult.OK)
                 {
+                    exp001 = 0;
+                    exp002 = 0;
+                    exp003 = 0;
                     ImportData(sheetdata);
                 }
                 
@@ -143,6 +149,7 @@ namespace HRF_StockImport
                 }
                 if (import_index == 1)
                 {
+
                     if (index == 0)
                     {
                         Sql.ExecQuery(string.Format(insert_sql,
@@ -166,11 +173,27 @@ namespace HRF_StockImport
                         ));
                         index++;
                     }
+                    
 
-                    if (dr["貨品編號"].ToString() != "合計")
+                    switch (dr["貨品編號"].ToString())
+                    {
+                        case "EXP001":
+                            exp001 = Convert.ToSingle(dr["期末成本"]);
+                            break;
+                        case "EXP002":
+                            exp002 = Convert.ToSingle(dr["期末成本"]);
+                            break;
+                        case "EXP003":
+                            exp003 = Convert.ToSingle(dr["期末成本"]);
+                            break;
+                    }
+
+                    if (dr["貨品編號"].ToString() != "合計" && dr["貨品編號"].ToString() != "EXP001" && dr["貨品編號"].ToString() != "EXP002" && dr["貨品編號"].ToString() != "EXP003")
                     {
                         //貨品編號為廠商代號+配件號,透過-切割取出廠商代號及配件號
                         int cage_index = dr["貨品編號"].ToString().IndexOf("-");
+                        
+                        
                         if (cage_index > 0)
                         {
                             CAGE = dr["貨品編號"].ToString().Substring(0, cage_index);
@@ -235,13 +258,15 @@ namespace HRF_StockImport
                     seq++;
                 }
             }
+            string update_sql = "update receipt set [Freight]='{0}',[Customs]='{1}',[Tariff]='{2}' where Recid='" + id+"'";
+            Sql.ExecQuery(string.Format(update_sql,exp001,exp002,exp003));
             if(nodata.Rows.Count == 0)
             {
                 MessageBox.Show("匯入完成");
             }
             else
             {
-                MessageBox.Show("匯入完成，但有找不到的料號，請詳查");
+                MessageBox.Show("匯入完成，但有找不到的料號，將會在畫面中顯示，請詳查");
             }
             
             dataGridView1.DataSource = nodata;
